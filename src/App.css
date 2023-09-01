@@ -1,0 +1,29 @@
+.main-container {
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  background-color: antiquewhite;
+  height: 100vh
+}
+
+.input-button {
+  display: flex;
+  flex-direction: row;
+  margin: 2rem;
+  justify-content: space-between;
+}
+
+.input-recipient {
+  width: 50%;
+  align-items: center;
+  text-align: center;
+  /* margin-left: 2rem; */
+}
+
+button {
+  width: fit-content;
+  height: 3rem;
+  border-radius: 1rem;
+  background-color: white;
+  font-size: 1rem;
+}

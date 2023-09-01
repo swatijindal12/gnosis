@@ -1,0 +1,11 @@
+.heading {
+  margin: 1rem;
+}
+
+.container {
+  border: 1px solid #000; /* Add border style */
+  padding: 0.2rem;
+  text-align: center;
+  background-color: rgb(244, 205, 155);
+  width: 100%;
+}

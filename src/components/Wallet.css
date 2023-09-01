@@ -1,0 +1,44 @@
+.wallet-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  background: antiquewhite;
+  padding: 0.2rem;
+}
+
+.safe-account {
+  margin: 1rem;
+}
+
+.successfully-create {
+  display: 'flex';
+  flex-direction: 'column';
+  align-items: 'center';
+  justify-content: 'center';
+  margin: 2rem;
+}
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.spin-loader {
+  border: 16px solid antiquewhite;
+  border-radius: 50%;
+  border-top: 16px solid rgb(70, 119, 148);
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
