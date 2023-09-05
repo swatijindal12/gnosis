@@ -5,7 +5,7 @@ const { EthersAdapter } = require('@safe-global/protocol-kit')
 
 const owner2Sign = async (recipientAddress, safeSdk) => {
   const RPC_URL =
-    'https://eth-goerli.g.alchemy.com/v2/Yr4FvM6pDQqSqKoxJQPTtEY2Bwvz-gIR'
+    'https://eth-goerli.g.alchemy.com/v2/....'
 
   // URL of goerli transaction safe service
   const txServiceUrl = 'https://safe-transaction-goerli.safe.global'
@@ -14,10 +14,10 @@ const owner2Sign = async (recipientAddress, safeSdk) => {
   const provider = new ethers.providers.JsonRpcProvider(RPC_URL)
 
   const ACCOUNT_1_PRIVATE_KEY =
-    '0x0e7cb1ec7f9f714eb892c03a4daaa0c230135e16e282d598e74707016802bd46'
+    '0x....'
 
   const ACCOUNT_2_PRIVATE_KEY =
-    '0x849df8a1e6e7f5ab6f0779e823dc4274a6319edbc05766e4e82a936d441c3722'
+    '0x....'
 
   // Initialize signers
   const owner1Signer = new ethers.Wallet(ACCOUNT_1_PRIVATE_KEY, provider)
