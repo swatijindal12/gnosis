@@ -5,6 +5,8 @@ import './Wallet.css'
 import { walletCreation } from '../utils/walletCreation'
 import { useNavigate } from 'react-router-dom'
 import { useSafeSdk } from './SafeContext'
+import AddOwner from './AddOwner'
+const ethers = require('ethers')
 
 const Wallet = () => {
   const [data, setData] = useState(null)
@@ -12,13 +14,18 @@ const Wallet = () => {
   const [safeTx, setSafeTx] = useState('')
   const [success, setSuccess] = useState(false)
   const [buttonClick, setButtonClick] = useState(false)
-  const { setSafeSdk } = useSafeSdk() // Use the useSafeSdk hook
+  const { setSafeSdk, userAddr, threshold } = useSafeSdk() // Use the useSafeSdk hook
+  const [address, setAddress] = useState('')
+  const [metamaskBtn, setMetamaskBtn] = useState(false)
+  const [metamaskSigner, setMetamaskSigner] = useState('')
 
   const handleWalletCreate = async () => {
     setButtonClick(true)
     console.log('Wallet Creation starts')
+    console.log('USer address is', userAddr)
+    console.log('threshold value is:', threshold)
     try {
-      const result = await walletCreation()
+      const result = await walletCreation(metamaskSigner, userAddr, threshold)
       console.log('Data are :', result)
       setTxURL(result.txURL)
       setSafeTx(result.safeTxURL)
@@ -33,6 +40,25 @@ const Wallet = () => {
       console.log('Error: ' + error.message)
     }
     setButtonClick(false)
+  }
+
+  const handleMetamask = () => {
+    console.log('Inside metamask button')
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    console.log('first provider is:', provider)
+    if (provider) {
+      const signer = provider.getSigner()
+      setMetamaskSigner(signer)
+      window.ethereum
+        .request({ method: 'eth_requestAccounts' })
+        .then((res) => setAddress(res[0]))
+      setMetamaskBtn(true)
+    } else {
+      alert('install metamask extension!!')
+    }
+    console.log('address is:', address)
+    // setMetamaskBtn(false)
   }
 
   const navigate = useNavigate()
@@ -54,9 +80,17 @@ const Wallet = () => {
     <>
       <div className="wallet-container">
         <Header />
+        <button onClick={handleMetamask} className="safe-account">
+          Connect to wallet
+        </button>
         <button onClick={handleWalletCreate} className="safe-account">
           Create Safe Account
         </button>
+      </div>
+      <div>
+        {metamaskBtn && (
+          <AddOwner address={address} onCreateSafe={handleWalletCreate} />
+        )}
       </div>
       <div>
         {success ? (

@@ -1,0 +1,43 @@
+/* AddOwner.css */
+.add-owner-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+}
+
+h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+h5 {
+  font-size: 1rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.input-recipient {
+  width: 100%;
+  padding: 5px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

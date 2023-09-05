@@ -3,26 +3,19 @@ const Safe = require('@safe-global/protocol-kit').default
 const SafeApiKit = require('@safe-global/api-kit').default
 const { EthersAdapter } = require('@safe-global/protocol-kit')
 
-const owner2Sign = async (recipientAddress, safeSdk) => {
-  const RPC_URL =
-    'https://eth-goerli.g.alchemy.com/v2/Yr4FvM6pDQqSqKoxJQPTtEY2Bwvz-gIR'
-
+const owner2Sign = async (recipientAddress, safeSdk, userAddr) => {
   // URL of goerli transaction safe service
   const txServiceUrl = 'https://safe-transaction-goerli.safe.global'
 
-  // setup ethers using the RPC_URL
-  const provider = new ethers.providers.JsonRpcProvider(RPC_URL)
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
 
-  const ACCOUNT_1_PRIVATE_KEY =
-    '0x0e7cb1ec7f9f714eb892c03a4daaa0c230135e16e282d598e74707016802bd46'
-
-  const ACCOUNT_2_PRIVATE_KEY =
-    '0x849df8a1e6e7f5ab6f0779e823dc4274a6319edbc05766e4e82a936d441c3722'
+  const owner1Addr = userAddr[0]
+  const owner2Addr = userAddr[1]
 
   // Initialize signers
-  const owner1Signer = new ethers.Wallet(ACCOUNT_1_PRIVATE_KEY, provider)
-  const owner2Signer = new ethers.Wallet(ACCOUNT_2_PRIVATE_KEY, provider)
-  
+  const owner1Signer = provider.getSigner(owner1Addr)
+  const owner2Signer = provider.getSigner(owner2Addr)
+
   // initialize ETHERS adapter from owner 1
   const ethAdapterOwner1 = new EthersAdapter({
     ethers,
@@ -86,7 +79,7 @@ const owner2Sign = async (recipientAddress, safeSdk) => {
 
   // Sign the transaction hash
   const signature = await safeSdkOwner2.signTransactionHash(safeTransactionHash)
-  console.log('Signature of 2nd owner : ', signature)
+  //  console.log('Signature of 2nd owner : ', signature)
 
   // Confirm the transaction
   const response = await safeService.confirmTransaction(
@@ -101,12 +94,11 @@ const owner2Sign = async (recipientAddress, safeSdk) => {
 
   // Execute the transaction
   const executeTxResponse = await safeSdk.executeTransaction(safeTx)
-  console.log('Transaction executed : ', executeTxResponse)
+  // console.log('Transaction executed : ', executeTxResponse)
 
   // Fetch the transaction receipt
   const receipt = await executeTxResponse.transactionResponse?.wait()
   console.log('Transaction receipt : ', receipt)
-  console.log(`https://goerli.etherscan.io/tx/${receipt.transactionHash}`)
 
   const txReceipt = `https://goerli.etherscan.io/tx/${receipt.transactionHash}`
   // Fetch balance from Safe address
@@ -117,11 +109,12 @@ const owner2Sign = async (recipientAddress, safeSdk) => {
       'ether',
     )} ETH`,
   )
-  const ownerAddr = owner2Signer.address
-  const balanceWei = await provider.getBalance(ownerAddr)
+  // const ownerAddr = owner2Signer.address
+  const balanceWei = await provider.getBalance(owner2Addr)
 
   // Convert the balance from wei to ether
   const balanceEther = ethers.utils.formatEther(balanceWei)
+  const ownerAddr = owner2Addr
 
   return { txReceipt, balanceEther, ownerAddr }
 }

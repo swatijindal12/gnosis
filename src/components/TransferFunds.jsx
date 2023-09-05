@@ -15,23 +15,18 @@ const TransferFunds = ({ safeSdk1 }) => {
   const [owner1Sign, setOwner1Sign] = useState(null)
   const [owner2SignTx, setOwner2SignTx] = useState(null)
   const [buttonClick, setButtonClick] = useState(false)
-  // const [beforeBalance, setBeforeBalance] = useState('')
   const [afterBalance, setAfterBalance] = useState('')
 
-  const { sdk: safeSdk } = useSafeSdk() // Use the useSafeSdk hook
+  const { sdk: safeSdk, userAddr } = useSafeSdk() // Use the useSafeSdk hook
 
   const handleTransferFunds = async () => {
     setButtonClick(true)
-    console.log('recipient addr is:', recipient)
 
-    // const beforeBalance = await getBalanceForAddress(recipient)
-    // setBeforeBalance(beforeBalance)
+    const result = await transferFunds(recipient, sdk, userAddr)
 
-    const result = await transferFunds(recipient, sdk)
-    
     setOwner1Sign(result)
     setButtonClick(false)
-    const result2 = await owner2Sign(recipient, sdk)
+    const result2 = await owner2Sign(recipient, sdk, userAddr)
     setOwner2SignTx(result2)
 
     const receiverAfterBal = await getBalanceForAddress(recipient)

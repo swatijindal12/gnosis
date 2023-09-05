@@ -2,21 +2,18 @@ const ethers = require('ethers')
 const SafeApiKit = require('@safe-global/api-kit').default
 const { EthersAdapter } = require('@safe-global/protocol-kit')
 
-const transferFunds = async (recipientAddress, safeSdk) => {
-  const RPC_URL =
-    'https://eth-goerli.g.alchemy.com/v2/Yr4FvM6pDQqSqKoxJQPTtEY2Bwvz-gIR'
-
+const transferFunds = async (recipientAddress, safeSdk, userAddr) => {
   // URL of goerli transaction safe service
   const txServiceUrl = 'https://safe-transaction-goerli.safe.global'
 
   // setup ethers using the RPC_URL
-  const provider = new ethers.providers.JsonRpcProvider(RPC_URL)
+  // const provider = new ethers.providers.JsonRpcProvider(RPC_URL)
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
 
-  const ACCOUNT_1_PRIVATE_KEY =
-    '0x0e7cb1ec7f9f714eb892c03a4daaa0c230135e16e282d598e74707016802bd46'
+  // Initialize signers & Address
+  const owner1Addr = userAddr[0]
+  const owner1Signer = provider.getSigner(owner1Addr)
 
-  // Initialize signers
-  const owner1Signer = new ethers.Wallet(ACCOUNT_1_PRIVATE_KEY, provider)
   // initialize ETHERS adapter from owner 1
   const ethAdapterOwner1 = new EthersAdapter({
     ethers,
@@ -74,13 +71,11 @@ const transferFunds = async (recipientAddress, safeSdk) => {
   ).results
   console.log('Pending transactions : ', pendingTransactions)
 
-  // console.log('Owner 1 addr:', owner1Signer.address)
-  const ownerAddr = owner1Signer.address
-  const balanceWei = await provider.getBalance(owner1Signer.address)
+  const balanceWei = await provider.getBalance(owner1Addr)
 
   // Convert the balance from wei to ether
   const balanceEther = ethers.utils.formatEther(balanceWei)
-
+  const ownerAddr = owner1Addr
   return { ownerAddr, balanceEther }
 }
 

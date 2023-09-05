@@ -22,27 +22,19 @@ const { SafeFactory, EthersAdapter } = require('@safe-global/protocol-kit')
     3. Account executing the transaction pays the gas fee
  */
 
-const walletCreation = async () => {
+const walletCreation = async (metamaskSigner, userAddr, threshold) => {
   // Goerli network RPC URL
-  const RPC_URL =
-    'https://eth-goerli.g.alchemy.com/v2/Yr4FvM6pDQqSqKoxJQPTtEY2Bwvz-gIR'
+  // const RPC_URL =
+  //   'https://eth-goerli.g.alchemy.com/v2/Yr4FvM6pDQqSqKoxJQPTtEY2Bwvz-gIR'
 
   // setup ethers using the RPC_URL
-  const provider = new ethers.providers.JsonRpcProvider(RPC_URL)
-
-  const ACCOUNT_1_PRIVATE_KEY =
-    '0x0e7cb1ec7f9f714eb892c03a4daaa0c230135e16e282d598e74707016802bd46'
-
-  const ACCOUNT_2_PRIVATE_KEY =
-    '0x849df8a1e6e7f5ab6f0779e823dc4274a6319edbc05766e4e82a936d441c3722'
-
-  const ACCOUNT_3_PRIVATE_KEY =
-    '0x81e05d669c065d7b3a396232e1e792bb75769e9b58d4f370d2b8685ba6194510'
+  // const provider = new ethers.providers.JsonRpcProvider(RPC_URL)
 
   // Initialize signers
-  const owner1Signer = new ethers.Wallet(ACCOUNT_1_PRIVATE_KEY, provider)
-  const owner2Signer = new ethers.Wallet(ACCOUNT_2_PRIVATE_KEY, provider)
-  const owner3Signer = new ethers.Wallet(ACCOUNT_3_PRIVATE_KEY, provider)
+  const owner1Signer = metamaskSigner
+  const owner1Addr = userAddr[0]
+
+  const owner2 = userAddr[1]
 
   // initialize ETHERS adapter from owner 1
   const ethAdapterOwner1 = new EthersAdapter({
@@ -60,12 +52,8 @@ const walletCreation = async () => {
   console.log('Safe factory initialized...')
 
   const safeAccountConfig = {
-    owners: [
-      await owner1Signer.getAddress(),
-      await owner2Signer.getAddress(),
-      await owner3Signer.getAddress(),
-    ],
-    threshold: 2,
+    owners: [await owner1Addr, await owner2], //, await owner3Signer],
+    threshold: threshold,
   }
 
   console.log('SAFE ACCOUNT CONFIG', safeAccountConfig.owners)
