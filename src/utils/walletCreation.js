@@ -25,19 +25,19 @@ const { SafeFactory, EthersAdapter } = require('@safe-global/protocol-kit')
 const walletCreation = async () => {
   // Goerli network RPC URL
   const RPC_URL =
-    'https://eth-goerli.g.alchemy.com/v2/Yr4FvM6pDQqSqKoxJQPTtEY2Bwvz-gIR'
+    'https://eth-goerli.g.alchemy.com/v2/....'
 
   // setup ethers using the RPC_URL
   const provider = new ethers.providers.JsonRpcProvider(RPC_URL)
 
   const ACCOUNT_1_PRIVATE_KEY =
-    '0x0e7cb1ec7f9f714eb892c03a4daaa0c230135e16e282d598e74707016802bd46'
+    '0x....'
 
   const ACCOUNT_2_PRIVATE_KEY =
-    '0x849df8a1e6e7f5ab6f0779e823dc4274a6319edbc05766e4e82a936d441c3722'
+    '0x....'
 
   const ACCOUNT_3_PRIVATE_KEY =
-    '0x81e05d669c065d7b3a396232e1e792bb75769e9b58d4f370d2b8685ba6194510'
+    '0x....'
 
   // Initialize signers
   const owner1Signer = new ethers.Wallet(ACCOUNT_1_PRIVATE_KEY, provider)
