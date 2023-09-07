@@ -70,7 +70,11 @@ const TransferFunds = ({ safeSdk1 }) => {
           {owner1Sign && <Card ownerData={owner1Sign} />}
           {owner2SignTx && <Card ownerData={owner2SignTx} />}
           {afterBalance && (
-            <BalanceCard recipient={recipient} afterBalance={afterBalance} />
+            <BalanceCard
+              recipient={recipient}
+              afterBalance={afterBalance}
+              txReceipt={owner2SignTx.txReceipt}
+            />
           )}
         </>
       )}

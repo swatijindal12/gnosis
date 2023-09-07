@@ -35,7 +35,7 @@ const owner2Sign = async (recipientAddress, safeSdk, userAddr) => {
   const destination = recipientAddress
 
   // Amount to transfer to the destination address
-  const amount = ethers.utils.parseUnits('0.000000001', 'ether').toString()
+  const amount = ethers.utils.parseUnits('0.006', 'ether').toString()
 
   // transaction metadata
   const safeTransactionData = {

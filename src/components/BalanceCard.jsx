@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BalanceCard = ({ recipient, afterBalance }) => {
+const BalanceCard = ({ recipient, afterBalance, txReceipt }) => {
   return (
     <div className="card">
       <div className="card-block">
@@ -8,6 +8,13 @@ const BalanceCard = ({ recipient, afterBalance }) => {
           Funds Transfer Successfully!!
         </h4>
         <p>Recipient Address: {recipient}</p>
+        <p>
+          Tx hash:{' '}
+          <a href={txReceipt} target="_blank">
+            {txReceipt}
+          </a>
+        </p>
+
         {/* <p>Before Balance: {beforeBalance} ETH</p> */}
         <p>After Balance: {afterBalance.balance} ETH</p>
       </div>

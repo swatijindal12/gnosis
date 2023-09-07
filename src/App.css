@@ -24,6 +24,6 @@ button {
   width: fit-content;
   height: 3rem;
   border-radius: 1rem;
-  background-color: white;
+  background-color: rgb(244, 205, 155);
   font-size: 1rem;
 }

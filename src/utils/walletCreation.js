@@ -69,7 +69,7 @@ const walletCreation = async (metamaskSigner, userAddr, threshold) => {
   console.log(`https://app.safe.global/gor:${safeAddress}`)
 
   // amount to transfer through transaction
-  const safeAmount = ethers.utils.parseUnits('0.00001', 'ether').toHexString()
+  const safeAmount = ethers.utils.parseUnits('0.01', 'ether').toHexString()
 
   // transaction parameters
   const transactionParameters = {

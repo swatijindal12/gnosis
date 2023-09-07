@@ -2,7 +2,6 @@ import React from 'react'
 import './Card.css'
 
 const Card = ({ ownerData }) => {
-  console.log("Owner Data is:", ownerData)
   return (
     <div className="card-container">
       <div className="card">
