@@ -22,7 +22,7 @@ const { SafeFactory, EthersAdapter } = require('@safe-global/protocol-kit')
     3. Account executing the transaction pays the gas fee
  */
 
-const walletCreation = async (metamaskSigner, userAddr, threshold) => {
+export const walletCreation = async (metamaskSigner, userAddr, threshold) => {
   // Goerli network RPC URL
   // const RPC_URL =
   //   'https://eth-goerli.g.alchemy.com/v2/Yr4FvM6pDQqSqKoxJQPTtEY2Bwvz-gIR'
@@ -93,5 +93,3 @@ const walletCreation = async (metamaskSigner, userAddr, threshold) => {
   )
   return { txURL, safeTxURL, safeSdk }
 }
-
-module.exports = { walletCreation }

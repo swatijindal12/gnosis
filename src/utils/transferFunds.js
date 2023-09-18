@@ -2,7 +2,7 @@ const ethers = require('ethers')
 const SafeApiKit = require('@safe-global/api-kit').default
 const { EthersAdapter } = require('@safe-global/protocol-kit')
 
-const transferFunds = async (recipientAddress, safeSdk, userAddr) => {
+export const transferFunds = async (recipientAddress, safeSdk, userAddr) => {
   // URL of goerli transaction safe service
   const txServiceUrl = 'https://safe-transaction-goerli.safe.global'
 
@@ -78,5 +78,3 @@ const transferFunds = async (recipientAddress, safeSdk, userAddr) => {
   const ownerAddr = owner1Addr
   return { ownerAddr, balanceEther }
 }
-
-module.exports = { transferFunds }

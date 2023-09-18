@@ -3,7 +3,7 @@ const Safe = require('@safe-global/protocol-kit').default
 const SafeApiKit = require('@safe-global/api-kit').default
 const { EthersAdapter } = require('@safe-global/protocol-kit')
 
-const owner2Sign = async (recipientAddress, safeSdk, userAddr) => {
+export const owner2Sign = async (recipientAddress, safeSdk, userAddr) => {
   // URL of goerli transaction safe service
   const txServiceUrl = 'https://safe-transaction-goerli.safe.global'
 
@@ -118,5 +118,3 @@ const owner2Sign = async (recipientAddress, safeSdk, userAddr) => {
 
   return { txReceipt, balanceEther, ownerAddr }
 }
-
-module.exports = { owner2Sign }
